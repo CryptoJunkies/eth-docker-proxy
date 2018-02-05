@@ -1,0 +1,19 @@
+sudo: required
+
+language: bash
+
+dist: xenial
+
+services:
+  - docker
+
+script:
+  - DOCKER_REPO="cryptojunkies"
+  - TAG="0.0.5"
+  - CONT_NAME="eth-proxy"
+  - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+  - docker build -t $DOCKER_REPO/$CONT_NAME:latest .
+  - docker images
+  - docker tag $DOCKER_REPO/$CONT_NAME:latest $DOCKER_REPO/$CONT_NAME:$TAG
+  - docker push $DOCKER_REPO/$CONT_NAME:$TAG
+  - docker push $DOCKER_REPO/$CONT_NAME
