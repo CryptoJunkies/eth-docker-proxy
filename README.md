@@ -6,7 +6,7 @@ Dockerfile to build cryptojunkies/eth-proxy container.
 Just a stratum proxy.  Point all your miners at the proxy, and point the proxy at the hub.
 
 Settings should be defined as env vars in your Docker run or compose.  See the proxy repo for details:
-https://github.com/narfman0/eth-proxy
+https://github.com/CryptoJunkies/eth-proxy
 
 ## Pre-requisites
 
