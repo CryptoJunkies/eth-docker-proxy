@@ -3,7 +3,7 @@ FROM ubuntu:xenial
 LABEL maintainer="Chris Diehl <cultclassik@gmail.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV SRC_REPO='https://github.com/narfman0/eth-proxy.git'
+ENV SRC_REPO='https://github.com/CryptoJunkies/eth-proxy'
 
 WORKDIR /
 
