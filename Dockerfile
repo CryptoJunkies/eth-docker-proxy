@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM python:2.7.14-alpine3.7
 
 LABEL maintainer="Chris Diehl <cultclassik@gmail.com>"
 
@@ -7,26 +7,24 @@ ENV SRC_REPO='https://github.com/CryptoJunkies/eth-proxy'
 
 WORKDIR /
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apk update \
+  && apk add \
     git \
-    python-twisted \
-    ca-certificates \
+    build-base \
+    python-dev \
  && git clone $SRC_REPO \
  && mv /eth-proxy /app \
- && apt-get remove -y \
-    git \
-    ca-certificates \
- && apt-get autoremove -y \
- && rm -rf /var/lib/apt/lists/*
+ && cd /app \
+ && python setup.py install
 
 WORKDIR /app
 
-RUN useradd eth-proxy && echo "eth-proxy:eth-proxy" | chpasswd \
- && chown -R eth-proxy:eth-proxy /app
+#RUN useradd eth-proxy && echo "eth-proxy:eth-proxy" | chpasswd \
+# && chown -R eth-proxy:eth-proxy /app
 
-USER eth-proxy
+#USER eth-proxy
 
 EXPOSE 8080/tcp
 
-ENTRYPOINT ["python", "/app/eth-proxy.py"]
+ENTRYPOINT ["ethproxy"]
 CMD [""]
